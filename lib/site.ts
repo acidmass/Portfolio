@@ -7,7 +7,7 @@ export const site = {
   availability: 'Disponible para oportunidades junior',
   email: 'carmenmaria.perezm1@gmail.com',
   // PENDIENTE: la URL de tu perfil de LinkedIn
-  linkedin: 'https://www.linkedin.com/',
+  linkedin: 'https://www.linkedin.com/carmenpm/',
   cv: {
     // Coloca tu PDF en /public/cv/ con este nombre y cambia `available` a true.
     href: '/cv/carmen-maria-perez-cv.pdf.pdf',
