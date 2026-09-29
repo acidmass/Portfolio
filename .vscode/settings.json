@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^node -e \"const fs=require\\('node:fs'\\); const \\{PDFParse\\}=require\\('pdf-parse'\\); \\(async\\(\\)=>\\{ const parser=new PDFParse\\(\\{data:fs\\.readFileSync\\('public/PORTFOLIO UI_UX 2026\\.pdf'\\)\\}\\); const result=await parser\\.getImage\\(\\{partial:\\[6\\],imageThreshold:150\\}\\); console\\.log\\(result\\.pages\\.map\\(page=>\\(\\{page:page\\.pageNumber,images:page\\.images\\.map\\(\\(image,index\\)=>\\(\\{index,width:image\\.width,height:image\\.height,kind:image\\.kind\\}\\)\\)\\}\\)\\)\\); await parser\\.destroy\\(\\); \\}\\)\\(\\)\\.catch\\(error=>\\{ console\\.error\\(error\\); process\\.exitCode=1; \\}\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
