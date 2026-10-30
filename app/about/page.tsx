@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { ContactLinks } from '@/components/contact-links'
 import { Container } from '@/components/container'
 import { Pending } from '@/components/pending'
 import { ProjectImage } from '@/components/project-image'
 import { Section } from '@/components/project/project-sections'
 import { LocalizedText } from '@/components/localized-text'
-import { about, site } from '@/lib/site'
+import { about, capabilities, site } from '@/lib/site'
+import { projects } from '@/lib/projects'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -13,18 +15,35 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  const featuredProject = projects.find((project) => project.slug === 'murcia-pedalea')
+  const capabilityTranslations: Record<string, string> = {
+    Visual: 'Visual',
+    Digital: 'Digital',
+    'Arquitectura de información': 'Information architecture',
+    Prototipos: 'Prototypes',
+    'Dirección de arte': 'Art direction',
+    'Branding digital': 'Digital branding',
+    'Sistemas visuales': 'Visual systems',
+    Tipografía: 'Typography',
+    'Jerarquía visual': 'Visual hierarchy',
+    'Producto digital': 'Digital products',
+    Interacción: 'Interaction',
+    Microinteracciones: 'Microinteractions',
+  }
+
   return (
     <>
-      <Container className="pb-16 pt-10 md:pb-24 md:pt-14">
-        <div className="eyebrow flex items-center justify-between pb-4 text-muted-foreground">
+      <section className="bg-brand">
+        <Container className="pb-20 pt-10 md:pb-28 md:pt-14">
+        <div className="eyebrow flex items-center justify-between pb-4 text-foreground/60">
           <span><LocalizedText es="Sobre mí" en="About" /></span>
           <span><LocalizedText es={site.location} en="Murcia · Spain" /></span>
         </div>
-        <h1 className="mt-16 text-[clamp(3.5rem,12vw,11rem)] font-medium leading-[0.9] tracking-[-0.05em] md:mt-24">
+        <h1 className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]">
           <LocalizedText es="Sobre mí" en="About me" />
         </h1>
 
-        <div className="mt-16 grid gap-10 md:mt-24 md:grid-cols-12 md:gap-8">
+        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:gap-8">
           <ProjectImage
             media={{ src: about.photo, alt: `Fotografía profesional de ${site.name}` }}
             aspect="aspect-[4/5]"
@@ -33,21 +52,57 @@ export default function AboutPage() {
             className="md:col-span-5"
           />
           <div className="md:col-span-6 md:col-start-7 md:self-end">
-            <p className="text-balance text-2xl font-medium leading-snug tracking-[-0.02em] md:text-4xl">
+            <p className="text-balance text-2xl font-semibold leading-snug md:text-4xl">
               <LocalizedText
                 es={about.intro}
                 en="I am Carmen, a UI/UX and visual designer with a background in Interactive Graphic Design and Art History. I am especially interested in the intersection of digital products, web design and visual direction."
               />
             </p>
-            <p className="mt-8 flex items-center gap-2.5 text-sm">
-              <span aria-hidden className="size-1.5 rounded-full bg-foreground" />
+            <p className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-citrus px-4 py-2 text-sm font-medium">
+              <span aria-hidden className="size-2 rounded-full bg-foreground" />
               <LocalizedText es={site.availability} en="Available for junior opportunities" />
             </p>
           </div>
         </div>
       </Container>
+      </section>
 
-      <Section number="01" title="Formación">
+      {featuredProject && (
+        <Section number="01" title="Proyecto destacado">
+          <div className="grid gap-8 md:grid-cols-12 md:gap-10">
+            <Link href={`/projects/${featuredProject.slug}`} className="group block md:col-span-7">
+              <ProjectImage
+                media={featuredProject.cover}
+                aspect="aspect-[16/10]"
+                sizes="(min-width: 768px) 60vw, 100vw"
+                interactive
+              />
+            </Link>
+            <div className="md:col-span-5 md:self-end">
+              <p className="eyebrow text-muted-foreground">
+                <LocalizedText
+                  es={featuredProject.categories.join(' · ')}
+                  en={(featuredProject.en?.categories ?? featuredProject.categories).join(' · ')}
+                />
+              </p>
+              <h3 className="mt-4 text-3xl font-semibold md:text-5xl">
+                {featuredProject.title}
+              </h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">
+                <LocalizedText
+                  es={featuredProject.content.challenge ?? featuredProject.description ?? ''}
+                  en={featuredProject.en?.challenge ?? featuredProject.en?.description ?? featuredProject.description ?? ''}
+                />
+              </p>
+              <Link href={`/projects/${featuredProject.slug}`} className="mt-6 inline-flex items-center gap-3 rounded-full bg-brand px-5 py-3 text-sm font-semibold">
+                <LocalizedText es="Ver caso de estudio" en="Read case study" /> ↗
+              </Link>
+            </div>
+          </div>
+        </Section>
+      )}
+
+      <Section number="02" title="Formación">
         <ul>
           {about.education.map((item) => (
             <li key={item.title} className="flex flex-col gap-1 py-5 md:flex-row md:justify-between">
@@ -65,7 +120,7 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <Section number="02" title="Experiencia">
+      <Section number="03" title="Experiencia">
         {about.experience.length ? (
           <ul>
             {about.experience.map((item) => (
@@ -82,21 +137,29 @@ export default function AboutPage() {
         )}
       </Section>
 
-      <Section number="03" title="Herramientas">
-        {about.tools.length ? (
-          <ul className="flex flex-wrap gap-x-8 gap-y-3 text-xl">
-            {about.tools.map((tool) => (
-              <li key={tool}>{tool}</li>
-            ))}
-          </ul>
-        ) : (
-          <Pending hint="lib/site.ts → about.tools" className="max-w-2xl">
-            <LocalizedText es="Herramientas y software con los que trabajas." en="Tools and software you work with." />
-          </Pending>
-        )}
+      <Section number="04" title="Áreas de diseño">
+        <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+          {capabilities.map((group) => (
+            <div key={group.title}>
+              <h3 className="text-xl font-medium tracking-[-0.02em]">
+                <LocalizedText
+                  es={group.title}
+                  en={group.title === 'Visual' ? 'Visual' : group.title === 'Digital' ? 'Digital' : group.title}
+                />
+              </h3>
+              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-muted-foreground">
+                {group.items.map((item) => (
+                  <li key={item}>
+                    <LocalizedText es={item} en={capabilityTranslations[item] ?? item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </Section>
 
-      <Section number="04" title="Intereses de diseño">
+      <Section number="05" title="Intereses de diseño">
         <ul className="grid gap-4 sm:grid-cols-3">
           {about.interests.map((item, i) => (
             <li key={item} className="pt-4">
@@ -112,7 +175,7 @@ export default function AboutPage() {
         </ul>
       </Section>
 
-      <Section number="05" title="CV & contacto">
+      <Section number="06" title="CV & contacto">
         <ContactLinks className="max-w-2xl" />
       </Section>
     </>

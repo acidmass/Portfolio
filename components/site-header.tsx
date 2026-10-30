@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import { copy, type Language } from '@/lib/i18n'
 import { navigation, site } from '@/lib/site'
@@ -25,12 +26,12 @@ export function SiteHeader() {
   const isActive = (href: string) => pathname === href || (href === '/work' && pathname.startsWith('/projects'))
 
   return (
-    <header className="sticky top-0 z-50 bg-foreground text-background">
-      <Container className="flex h-16 items-center justify-between md:h-20">
+    <header className="sticky top-0 z-50 border-b border-line bg-background/90 text-foreground backdrop-blur-md">
+      <Container className="flex h-[4.5rem] items-center justify-between md:h-20">
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="text-[13px] font-bold uppercase tracking-[0.07em] sm:text-sm md:text-lg"
+          className="text-base font-bold tracking-tight sm:text-lg md:text-xl"
         >
           {site.name}
         </Link>
@@ -42,7 +43,7 @@ export function SiteHeader() {
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={cn('link-underline text-sm transition-opacity hover:opacity-75', isActive(item.href) && 'font-semibold')}
+                  className={cn('rounded-full px-4 py-2 text-sm transition-colors hover:bg-secondary', isActive(item.href) && 'bg-foreground text-background hover:bg-foreground')}
                 >
                   {navLabels[navigation.indexOf(item)]}
                 </Link>
@@ -51,28 +52,36 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div role="group" aria-label={language === 'en' ? 'Language' : 'Idioma'} className="flex gap-1">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div role="group" aria-label={language === 'en' ? 'Language' : 'Idioma'} className="flex rounded-full border border-line p-1">
             {(['es', 'en'] as const).map((option: Language) => (
               <button
                 key={option}
                 type="button"
                 aria-pressed={language === option}
                 onClick={() => setLanguage(option)}
-                className={`eyebrow border px-2 py-1 transition-colors ${language === option ? 'border-background bg-background text-foreground' : 'border-background/30 text-background/70 hover:border-background hover:text-background'}`}
+                className={`rounded-full px-2.5 py-1 text-[10px] font-semibold transition-colors ${language === option ? 'bg-foreground text-background' : 'text-muted-foreground hover:text-foreground'}`}
               >
                 {option.toUpperCase()}
               </button>
             ))}
           </div>
+          <Link
+            href="/contact"
+            aria-label={copy(language, 'Ir a contacto', 'Go to contact')}
+            className="hidden size-10 items-center justify-center rounded-full bg-brand transition-transform hover:rotate-45 sm:flex"
+          >
+            <ArrowUpRight aria-hidden size={18} />
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            className="eyebrow -mr-2 p-2 lg:hidden"
+            className="flex size-10 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:rotate-6 lg:hidden"
           >
-            {open ? (language === 'en' ? 'Close' : 'Cerrar') : language === 'en' ? 'Menu' : 'Menú'}
+            <span className="sr-only">{open ? (language === 'en' ? 'Close menu' : 'Cerrar menú') : language === 'en' ? 'Open menu' : 'Abrir menú'}</span>
+            {open ? <X aria-hidden size={18} /> : <Menu aria-hidden size={18} />}
           </button>
         </div>
       </Container>
@@ -80,7 +89,7 @@ export function SiteHeader() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-16 bg-background text-foreground md:top-20 lg:hidden"
+        className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-background text-foreground md:top-20 lg:hidden"
       >
         <Container className="flex h-full flex-col justify-between pb-10 pt-8">
           <nav aria-label={language === 'en' ? 'Mobile' : 'Móvil'}>
@@ -92,7 +101,7 @@ export function SiteHeader() {
                     onClick={() => setOpen(false)}
                     aria-current={isActive(item.href) ? 'page' : undefined}
                     className={cn(
-                      'flex items-baseline justify-between py-5 text-4xl font-medium tracking-[-0.03em]',
+                      'flex items-baseline justify-between border-b border-line py-5 text-4xl font-semibold',
                       isActive(item.href) && 'text-muted-foreground',
                     )}
                   >

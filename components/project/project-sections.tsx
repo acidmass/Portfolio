@@ -13,9 +13,11 @@ const hintFor = (slug: string, field: string) => `lib/projects.ts → ${slug} �
 export function Section({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
   const { language } = useLanguage()
   const englishTitles: Record<string, string> = {
+    'Proyecto destacado': 'Featured project',
     Formación: 'Education',
     Experiencia: 'Experience',
     Herramientas: 'Tools',
+    'Áreas de diseño': 'Design areas',
     'Intereses de diseño': 'Design interests',
     'CV & contacto': 'CV & contact',
     'Sistema visual': 'Visual system',
@@ -23,11 +25,11 @@ export function Section({ number, title, children }: { number: string; title: st
   }
 
   return (
-    <section aria-labelledby={`s-${number}`}>
-      <Container className="grid grid-cols-1 gap-8 py-16 md:grid-cols-12 md:gap-8 md:py-24">
+    <section aria-labelledby={`s-${number}`} className="border-t border-line">
+      <Container className="grid grid-cols-1 gap-8 py-20 md:grid-cols-12 md:gap-8 md:py-28">
         <div className="md:col-span-3">
           <h2 id={`s-${number}`} className="eyebrow flex gap-3 md:sticky md:top-24">
-            <span className="text-muted-foreground">{number}</span>
+            <span className="flex size-8 items-center justify-center rounded-full bg-brand text-foreground">{number}</span>
             <span>{language === 'en' ? englishTitles[title] ?? title : title}</span>
           </h2>
         </div>
@@ -69,7 +71,7 @@ export function ProjectHero({ project }: { project: Project }) {
 
   return (
     <section aria-labelledby="project-title">
-      <Container className="pb-10 pt-10 md:pb-16 md:pt-14">
+      <Container className="pb-12 pt-10 md:pb-20 md:pt-14">
         <div className="eyebrow flex items-center justify-between pb-4 text-muted-foreground">
           <Link href="/work" className="link-underline text-foreground">
             ← {copy(language, 'Proyectos', 'Work')}
@@ -78,11 +80,11 @@ export function ProjectHero({ project }: { project: Project }) {
         </div>
         <h1
           id="project-title"
-          className="mt-16 text-[clamp(3.25rem,11vw,10rem)] font-medium leading-[0.9] tracking-[-0.05em] md:mt-24"
+          className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]"
         >
           {localizedProject.title}
         </h1>
-        <dl className="mt-12 grid grid-cols-2 gap-6 pt-4 md:mt-16 md:grid-cols-12 md:gap-8">
+        <dl className="mt-12 grid grid-cols-2 gap-4 rounded-xl bg-secondary p-6 md:mt-16 md:grid-cols-12 md:gap-8 md:p-8">
           <div className="md:col-span-3">
             <dt className="eyebrow text-muted-foreground">{copy(language, 'Proyecto', 'Project')}</dt>
             <dd className="mt-2 font-mono text-sm">{project.number}</dd>
@@ -209,12 +211,12 @@ export function NextProject({ project }: { project: Project }) {
         <Link href={`/projects/${project.slug}`} className="group mt-10 flex items-end justify-between gap-6 md:mt-16">
           <span>
             <span className="block font-mono text-sm text-background/60">{project.number}</span>
-            <span className="mt-3 block text-[clamp(2.75rem,9vw,8rem)] font-medium leading-[0.92] tracking-[-0.05em] transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:translate-x-3">
+            <span className="mt-3 block text-5xl font-bold leading-[0.86] transition-transform duration-500 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:translate-x-3 sm:text-6xl md:text-8xl xl:text-[8rem]">
               {localizedProject.title}
             </span>
             <span className="eyebrow mt-5 block text-background/60">{localizedProject.categories.join(' · ')}</span>
           </span>
-          <span aria-hidden className="text-4xl transition-transform duration-500 group-hover:translate-x-2 md:text-6xl">
+          <span aria-hidden className="flex size-14 shrink-0 items-center justify-center rounded-full bg-brand text-4xl text-foreground transition-transform duration-500 group-hover:translate-x-2 md:size-20 md:text-6xl">
             →
           </span>
         </Link>

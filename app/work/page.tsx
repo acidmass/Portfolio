@@ -14,18 +14,26 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <Container className="pb-24 pt-10 md:pb-40 md:pt-14">
-      <div className="eyebrow flex items-center justify-between pb-4 text-muted-foreground">
-        <span><LocalizedText es="Índice de proyectos" en="Project index" /></span>
-        <span>({String(projects.length).padStart(2, '0')})</span>
-      </div>
-      <h1 className="mt-16 text-[clamp(3.5rem,12vw,11rem)] font-medium leading-[0.9] tracking-[-0.05em] md:mt-24">
-        <LocalizedText es="Proyectos" en="Work" />
-      </h1>
+    <>
+      <section className="bg-brand">
+        <Container className="pb-20 pt-10 md:pb-28 md:pt-14">
+          <div className="eyebrow flex items-center justify-between pb-4 text-foreground/60">
+            <span><LocalizedText es="Índice de proyectos" en="Project index" /></span>
+            <span>({String(projects.length).padStart(2, '0')})</span>
+          </div>
+          <h1 className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]">
+            <LocalizedText es="Proyectos" en="Work" />
+          </h1>
+          <p className="mt-8 max-w-lg text-lg leading-relaxed text-foreground/75">
+            <LocalizedText es="Ideas que toman forma en marcas, productos digitales y experiencias web." en="Ideas brought to life through brands, digital products and web experiences." />
+          </p>
+        </Container>
+      </section>
 
-      <ol className="mt-20 grid gap-x-8 gap-y-20 md:mt-32 md:grid-cols-2 md:gap-y-32">
-        {projects.map((project, i) => (
-          <li key={project.slug} className={cn(i % 2 === 1 && 'md:mt-40')}>
+      <Container className="py-16 md:py-24">
+        <ol className="grid gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-24">
+          {projects.map((project, i) => (
+            <li key={project.slug} className={cn(i % 2 === 1 && 'md:mt-28')}>
             <Link href={`/projects/${project.slug}`} className="group block">
               <ProjectImage
                 media={project.cover}
@@ -33,16 +41,18 @@ export default function WorkPage() {
                 sizes="(min-width: 768px) 50vw, 100vw"
                 interactive
               />
-              <div className="mt-5 flex items-baseline justify-between gap-4 pt-4">
-                <span className="font-mono text-sm">{project.number}</span>
-                <Eyebrow>
+              <div className="mt-5 flex items-center justify-between gap-4">
+                <span className="font-mono text-xs text-muted-foreground">{project.number}</span>
+                <Eyebrow className="text-right">
                   <LocalizedText
                     es={project.categories.join(' · ')}
                     en={(project.en?.categories ?? project.categories).join(' · ')}
                   />
                 </Eyebrow>
               </div>
-              <h2 className="mt-5 text-3xl font-medium tracking-[-0.035em] md:text-5xl">{project.title}</h2>
+              <h2 className="mt-4 flex items-center justify-between gap-4 text-3xl font-semibold md:text-5xl">
+                {project.title}<span aria-hidden className="flex size-10 items-center justify-center rounded-full bg-citrus text-lg transition-transform group-hover:rotate-45">↗</span>
+              </h2>
               {project.description && (
                 <p className="mt-3 max-w-md leading-relaxed text-muted-foreground">
                   <LocalizedText
@@ -52,9 +62,10 @@ export default function WorkPage() {
                 </p>
               )}
             </Link>
-          </li>
-        ))}
-      </ol>
-    </Container>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </>
   )
 }

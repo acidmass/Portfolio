@@ -37,7 +37,7 @@ export function ContactLinks({ className }: { className?: string }) {
             </span>
           </>
         )
-        const cls = 'group flex min-w-0 items-center gap-4 py-5'
+        const cls = 'group flex min-w-0 items-center gap-4 border-b border-foreground/15 py-5 transition-transform hover:translate-x-1'
         return (
           <li key={row.label}>
             {row.download ? (

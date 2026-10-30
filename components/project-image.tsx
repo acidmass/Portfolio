@@ -30,7 +30,7 @@ export function ProjectImage({
     <figure className={cn('w-full', className)}>
       <div
         className={cn(
-          'relative w-full overflow-hidden bg-surface transition-colors duration-500',
+          'relative w-full overflow-hidden rounded-lg bg-surface transition-colors duration-500',
           interactive && !localizedMedia.src && 'group-hover:bg-surface-hover',
           aspect,
         )}
@@ -41,11 +41,12 @@ export function ProjectImage({
             alt={localizedMedia.alt}
             fill
             sizes={sizes}
-            priority={priority}
+            loading={priority ? 'eager' : 'lazy'}
+            preload={priority}
             className={cn(
               localizedMedia.fit === 'contain' ? 'object-contain' : 'object-cover',
               'transition-transform duration-700 ease-[cubic-bezier(0.2,0.7,0.2,1)]',
-              interactive && localizedMedia.fit !== 'contain' && 'group-hover:scale-[1.03]',
+              interactive && localizedMedia.fit !== 'contain' && 'group-hover:scale-[1.02]',
             )}
           />
         ) : (

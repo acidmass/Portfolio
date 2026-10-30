@@ -3,7 +3,6 @@ import { FinalCta } from '@/components/home/final-cta'
 import { Hero } from '@/components/home/hero'
 import { MoreWork } from '@/components/home/more-work'
 import { SelectedWork } from '@/components/home/selected-work'
-import { Statement } from '@/components/home/statement'
 import { WhatIDo } from '@/components/home/what-i-do'
 
 export default function HomePage() {
@@ -14,7 +13,6 @@ export default function HomePage() {
       <SelectedWork />
       <WhatIDo />
       <MoreWork />
-      <Statement />
       <FinalCta />
     </>
   )
