@@ -18,7 +18,7 @@ export function FinalCta() {
             id="cta-title"
             className="mt-6 text-balance text-5xl font-medium leading-none md:text-7xl"
           >
-            {copy(language, '¿Tienes un proyecto en mente?', 'Have a project in mind?')}
+            {copy(language, '¿Buscas una diseñadora para tu equipo?', 'Looking for a designer to join your team?')}
           </h2>
           <Link
             href="/contact"

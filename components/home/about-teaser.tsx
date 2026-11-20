@@ -27,7 +27,7 @@ export function AboutTeaser() {
               {copy(
                 language,
                 about.intro,
-                'I am Carmen, a UI/UX and visual designer with a background in Interactive Graphic Design and Art History. I am especially interested in the intersection of digital products, web design and visual direction.',
+                about.introEn,
               )}
             </p>
             <div className="md:col-span-3 md:self-end md:text-right">

@@ -1,14 +1,14 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { LanguageProvider } from '@/components/language-provider'
 import { LocalizedText } from '@/components/localized-text'
 import './globals.css'
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const geist = localFont({ src: './fonts/geist-latin.woff2', variable: '--font-geist', weight: '100 900', display: 'swap' })
+const geistMono = localFont({ src: './fonts/geist-mono-latin.woff2', variable: '--font-geist-mono', weight: '100 900', display: 'swap' })
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   },
   description:
     'Portfolio de Carmen María Pérez, diseñadora junior UI/UX & Visual especializada en diseño web, producto digital y sistemas visuales. Murcia, España.',
-  generator: 'v0.app',
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },

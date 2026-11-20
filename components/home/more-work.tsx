@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useLanguage } from '@/components/language-provider'
-import { copy } from '@/lib/i18n'
+import { copy, localizeProject } from '@/lib/i18n'
 import { moreProjects } from '@/lib/projects'
 import { Container, Eyebrow } from '../container'
 
@@ -31,7 +31,7 @@ export function MoreWork() {
                   {project.title}
                 </span>
                 <span className="eyebrow col-start-2 row-start-2 text-muted-foreground md:col-start-3 md:row-start-1">
-                  {project.categories.join(' · ')}
+                  {localizeProject(project, language).categories.join(' · ')}
                 </span>
                 <span
                   aria-hidden

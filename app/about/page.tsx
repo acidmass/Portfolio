@@ -2,156 +2,98 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ContactLinks } from '@/components/contact-links'
 import { Container } from '@/components/container'
-import { Pending } from '@/components/pending'
 import { ProjectImage } from '@/components/project-image'
 import { Section } from '@/components/project/project-sections'
 import { LocalizedText } from '@/components/localized-text'
 import { about, capabilities, site } from '@/lib/site'
 import { projects } from '@/lib/projects'
+import { capabilityTranslations } from '@/lib/i18n'
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Sobre Carmen María Pérez, diseñadora junior UI/UX & Visual con formación en Diseño Gráfico Interactivo e Historia del Arte.',
+  title: 'Sobre mí',
+  description: 'Conoce a Carmen María Pérez, diseñadora junior de UI/UX y diseño visual en Murcia. Formación, experiencia en diseño y desarrollo web, y herramientas.',
 }
 
 export default function AboutPage() {
   const featuredProject = projects.find((project) => project.slug === 'murcia-pedalea')
-  const capabilityTranslations: Record<string, string> = {
-    Visual: 'Visual',
-    Digital: 'Digital',
-    'Arquitectura de información': 'Information architecture',
-    Prototipos: 'Prototypes',
-    'Dirección de arte': 'Art direction',
-    'Branding digital': 'Digital branding',
-    'Sistemas visuales': 'Visual systems',
-    Tipografía: 'Typography',
-    'Jerarquía visual': 'Visual hierarchy',
-    'Producto digital': 'Digital products',
-    Interacción: 'Interaction',
-    Microinteracciones: 'Microinteractions',
-  }
-
   return (
     <>
       <section className="bg-brand">
         <Container className="pb-20 pt-10 md:pb-28 md:pt-14">
-        <div className="eyebrow flex items-center justify-between pb-4 text-foreground/60">
-          <span><LocalizedText es="Sobre mí" en="About" /></span>
-          <span><LocalizedText es={site.location} en="Murcia · Spain" /></span>
-        </div>
-        <h1 className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]">
-          <LocalizedText es="Sobre mí" en="About me" />
-        </h1>
-
-        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:gap-8">
-          <ProjectImage
-            media={{ src: about.photo, alt: `Fotografía profesional de ${site.name}` }}
-            aspect="aspect-[4/5]"
-            sizes="(min-width: 768px) 40vw, 100vw"
-            priority
-            className="md:col-span-5"
-          />
-          <div className="md:col-span-6 md:col-start-7 md:self-end">
-            <p className="text-balance text-2xl font-semibold leading-snug md:text-4xl">
-              <LocalizedText
-                es={about.intro}
-                en="I am Carmen, a UI/UX and visual designer with a background in Interactive Graphic Design and Art History. I am especially interested in the intersection of digital products, web design and visual direction."
-              />
-            </p>
-            <p className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-citrus px-4 py-2 text-sm font-medium">
-              <span aria-hidden className="size-2 rounded-full bg-foreground" />
-              <LocalizedText es={site.availability} en="Available for junior opportunities" />
-            </p>
+          <div className="eyebrow flex items-center justify-between gap-4 pb-4 text-foreground/60">
+            <span><LocalizedText es="Sobre mí" en="About" /></span>
+            <span><LocalizedText es={site.location} en="Murcia · Spain" /></span>
           </div>
-        </div>
-      </Container>
-      </section>
-
-      {featuredProject && (
-        <Section number="01" title="Proyecto destacado">
-          <div className="grid gap-8 md:grid-cols-12 md:gap-10">
-            <Link href={`/projects/${featuredProject.slug}`} className="group block md:col-span-7">
-              <ProjectImage
-                media={featuredProject.cover}
-                aspect="aspect-[16/10]"
-                sizes="(min-width: 768px) 60vw, 100vw"
-                interactive
-              />
-            </Link>
-            <div className="md:col-span-5 md:self-end">
-              <p className="eyebrow text-muted-foreground">
-                <LocalizedText
-                  es={featuredProject.categories.join(' · ')}
-                  en={(featuredProject.en?.categories ?? featuredProject.categories).join(' · ')}
-                />
+          <h1 className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]">
+            <LocalizedText es="Sobre mí" en="About me" />
+          </h1>
+          <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:gap-8">
+            <ProjectImage
+              media={{ src: about.photo, alt: `Fotografía profesional de ${site.name}` }}
+              aspect="aspect-[4/5]" sizes="(min-width: 768px) 40vw, 100vw"
+              priority className="md:col-span-5"
+            />
+            <div className="md:col-span-6 md:col-start-7 md:self-center">
+              <p className="text-balance text-2xl font-semibold leading-snug lg:text-3xl">
+                <LocalizedText es={about.intro} en={about.introEn} />
               </p>
-              <h3 className="mt-4 text-3xl font-semibold md:text-5xl">
-                {featuredProject.title}
-              </h3>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                <LocalizedText
-                  es={featuredProject.content.challenge ?? featuredProject.description ?? ''}
-                  en={featuredProject.en?.challenge ?? featuredProject.en?.description ?? featuredProject.description ?? ''}
-                />
+              <p className="mt-6 text-lg leading-relaxed text-foreground/80">
+                <LocalizedText es={about.approach} en={about.approachEn} />
               </p>
-              <Link href={`/projects/${featuredProject.slug}`} className="mt-6 inline-flex items-center gap-3 rounded-full bg-brand px-5 py-3 text-sm font-semibold">
-                <LocalizedText es="Ver caso de estudio" en="Read case study" /> ↗
-              </Link>
+              <p className="mt-5 text-lg leading-relaxed text-foreground/80">
+                <LocalizedText es={about.goal} en={about.goalEn} />
+              </p>
+              <p className="mt-8 inline-flex items-center gap-2.5 rounded-full bg-citrus px-4 py-2 text-sm font-medium">
+                <span aria-hidden className="size-2 rounded-full bg-foreground" />
+                <LocalizedText es={site.availability} en="Available for junior opportunities" />
+              </p>
             </div>
           </div>
-        </Section>
-      )}
+        </Container>
+      </section>
 
-      <Section number="02" title="Formación">
-        <ul>
-          {about.education.map((item) => (
-            <li key={item.title} className="flex flex-col gap-1 py-5 md:flex-row md:justify-between">
-              <span className="text-xl font-medium tracking-[-0.02em] md:text-2xl">
-                <LocalizedText
-                  es={item.title}
-                  en={item.title === 'Diseño Gráfico Interactivo' ? 'Interactive Graphic Design' : 'Art History'}
-                />
-              </span>
-              <span className="font-mono text-xs text-muted-foreground md:self-center">
-                {item.detail ?? <LocalizedText es="[Pendiente · centro y años]" en="[Pending · institution and years]" />}
-              </span>
+      <Section number="01" title="Experiencia">
+        <ul className="divide-y divide-line">
+          {about.experience.map((item) => (
+            <li key={item.title} className="py-7 first:pt-0">
+              <h3 className="text-2xl font-semibold md:text-3xl">
+                <LocalizedText es={item.title} en={item.titleEn} />
+              </h3>
+              <p className="mt-3 text-sm font-medium text-muted-foreground">{item.detail}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                <LocalizedText es={item.description} en={item.descriptionEn} />
+              </p>
             </li>
           ))}
         </ul>
       </Section>
 
-      <Section number="03" title="Experiencia">
-        {about.experience.length ? (
-          <ul>
-            {about.experience.map((item) => (
-              <li key={item.title} className="flex flex-col gap-1 py-5 md:flex-row md:justify-between">
-                <span className="text-xl font-medium tracking-[-0.02em] md:text-2xl">{item.title}</span>
-                {item.detail && <span className="text-muted-foreground">{item.detail}</span>}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <Pending hint="lib/site.ts → about.experience" className="max-w-2xl">
-            <LocalizedText es="Experiencia profesional, prácticas o colaboraciones." en="Professional experience, internships or collaborations." />
-          </Pending>
-        )}
+      <Section number="02" title="Formación">
+        <ul className="divide-y divide-line">
+          {about.education.map((item) => (
+            <li key={item.title} className="py-6 first:pt-0">
+              <h3 className="max-w-3xl text-xl font-medium leading-snug md:text-2xl">
+                <LocalizedText es={item.title} en={item.titleEn} />
+              </h3>
+              <p className="mt-3 text-sm text-muted-foreground">
+                <LocalizedText es={item.detail} en={item.detailEn} />
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-muted-foreground">
+          <LocalizedText es={about.languages} en={about.languagesEn} />
+        </p>
       </Section>
 
-      <Section number="04" title="Áreas de diseño">
-        <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      <Section number="03" title="Áreas de diseño">
+        <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
           {capabilities.map((group) => (
             <div key={group.title}>
-              <h3 className="text-xl font-medium tracking-[-0.02em]">
-                <LocalizedText
-                  es={group.title}
-                  en={group.title === 'Visual' ? 'Visual' : group.title === 'Digital' ? 'Digital' : group.title}
-                />
-              </h3>
-              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-muted-foreground">
+              <h3 className="text-2xl font-medium">{group.title}</h3>
+              <ul className="mt-4 space-y-2 text-muted-foreground">
                 {group.items.map((item) => (
-                  <li key={item}>
-                    <LocalizedText es={item} en={capabilityTranslations[item] ?? item} />
-                  </li>
+                  <li key={item}><LocalizedText es={item} en={capabilityTranslations[item] ?? item} /></li>
                 ))}
               </ul>
             </div>
@@ -159,25 +101,33 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section number="05" title="Intereses de diseño">
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {about.interests.map((item, i) => (
-            <li key={item} className="pt-4">
-              <span className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, '0')}</span>
-              <p className="mt-6 text-2xl font-medium tracking-[-0.02em]">
-                <LocalizedText
-                  es={item}
-                  en={item === 'Producto digital' ? 'Digital products' : item === 'Diseño web' ? 'Web design' : 'Visual direction'}
-                />
-              </p>
-            </li>
+      <Section number="04" title="Herramientas">
+        <ul className="flex flex-wrap gap-3">
+          {about.tools.map((tool) => (
+            <li key={tool} className="rounded-full border border-line px-5 py-3">{tool}</li>
           ))}
         </ul>
       </Section>
 
-      <Section number="06" title="CV & contacto">
-        <ContactLinks className="max-w-2xl" />
-      </Section>
+      {featuredProject && (
+        <Section number="05" title="Proyecto destacado">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <Link href={`/projects/${featuredProject.slug}`} className="group block">
+              <ProjectImage media={featuredProject.cover} aspect="aspect-[4/3]" sizes="(min-width: 1024px) 40vw, 100vw" interactive />
+            </Link>
+            <div className="self-center">
+              <h3 className="text-3xl font-semibold md:text-4xl">{featuredProject.title}</h3>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                <LocalizedText es={featuredProject.description ?? ''} en={featuredProject.en?.description ?? ''} />
+              </p>
+              <Link href={`/projects/${featuredProject.slug}`} className="mt-6 inline-flex rounded-full bg-brand px-5 py-3 font-semibold">
+                <LocalizedText es="Ver proyecto" en="View project" />
+              </Link>
+            </div>
+          </div>
+        </Section>
+      )}
+      <Section number="06" title="CV y contacto"><ContactLinks className="max-w-2xl" /></Section>
     </>
   )
 }

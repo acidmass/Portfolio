@@ -8,7 +8,7 @@ import { projects } from '@/lib/projects'
 import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: 'Work',
+  title: 'Proyectos',
   description: 'Proyectos de UI/UX, diseño web, branding y diseño visual de Carmen María Pérez.',
 }
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/components/language-provider'
-import { copy } from '@/lib/i18n'
+import { capabilityTranslations, copy } from '@/lib/i18n'
 import { capabilities } from '@/lib/site'
 import { Container, Eyebrow } from '../container'
 
@@ -45,7 +45,7 @@ export function WhatIDo() {
               <ul className="mt-8">
                 {group.items.map((item) => (
                   <li key={item} className="border-t border-foreground/15 py-2.5 text-[15px] text-foreground/75">
-                    {language === 'en' ? englishItems[item] ?? item : item}
+                    {language === 'en' ? capabilityTranslations[item] ?? englishItems[item] ?? item : item}
                   </li>
                 ))}
               </ul>
