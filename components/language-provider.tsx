@@ -17,10 +17,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('es')
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem('portfolio-language')
-    const browserLanguage: Language = navigator.language.toLowerCase().startsWith('en') ? 'en' : 'es'
-    const initialLanguage = savedLanguage === 'en' || savedLanguage === 'es' ? savedLanguage : browserLanguage
-    setLanguageState(initialLanguage)
+    try {
+      const savedLanguage = window.localStorage.getItem('portfolio-language')
+      if (savedLanguage === 'en' || savedLanguage === 'es') setLanguageState(savedLanguage)
+    } catch {
+      // Keep the Spanish default when browser storage is unavailable.
+    }
   }, [])
 
   useEffect(() => {
@@ -28,8 +30,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [language])
 
   const setLanguage = (nextLanguage: Language) => {
-    window.localStorage.setItem('portfolio-language', nextLanguage)
     setLanguageState(nextLanguage)
+    try {
+      window.localStorage.setItem('portfolio-language', nextLanguage)
+    } catch {
+      // Language switching still works for the current visit.
+    }
   }
 
   return <LanguageContext.Provider value={{ language, setLanguage }}>{children}</LanguageContext.Provider>

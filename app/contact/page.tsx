@@ -5,7 +5,7 @@ import { LocalizedText } from '@/components/localized-text'
 import { site } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: 'Contacto',
   description: 'Contacta con Carmen María Pérez para oportunidades junior, proyectos web, UI/UX o colaboraciones.',
 }
 

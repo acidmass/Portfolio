@@ -11,6 +11,7 @@ export function ContactLinks({ className }: { className?: string }) {
   const rows = [
     { label: 'Email', value: site.email, href: `mailto:${site.email}`, external: false },
     { label: 'LinkedIn', value: copy(language, 'Ver perfil', 'View profile'), href: site.linkedin, external: true },
+    { label: 'Behance', value: copy(language, 'Ver proyectos', 'View projects'), href: site.behance, external: true },
     ...(site.cv.available
       ? [{
           label: 'CV',
@@ -27,8 +28,8 @@ export function ContactLinks({ className }: { className?: string }) {
       {rows.map((row) => {
         const content = (
           <>
-            <span className="eyebrow w-24 shrink-0 text-muted-foreground">{row.label}</span>
-            <span className="min-w-0 flex-1 truncate text-lg md:text-xl">{row.value}</span>
+            <span className="eyebrow w-16 shrink-0 text-muted-foreground">{row.label}</span>
+            <span className="min-w-0 flex-1 break-words text-base sm:text-lg md:text-xl">{row.value}</span>
             <span
               aria-hidden
               className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

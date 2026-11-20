@@ -18,7 +18,7 @@ export function Hero() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <p className="eyebrow inline-flex items-center gap-2 rounded-full bg-citrus px-4 py-2 text-foreground">
             <span aria-hidden className="size-2 rounded-full bg-foreground" />
-            {copy(language, 'Disponible para proyectos', 'Available for projects')}
+            {copy(language, site.availability, 'Available for junior opportunities')}
           </p>
           <Eyebrow>{copy(language, site.location, 'Murcia · Spain')}</Eyebrow>
         </div>
@@ -29,8 +29,8 @@ export function Hero() {
         </h1>
 
         <div className="mt-10 flex flex-col gap-6 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-sm text-base leading-relaxed text-muted-foreground md:text-lg">
-            {copy(language, site.role, 'UI/UX and visual designer')}
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            {copy(language, 'Soy Carmen María, diseñadora junior de UI/UX y diseño visual. Conecto estructura, identidad y desarrollo web para dar forma a experiencias digitales claras y con personalidad.', 'I am Carmen María, a junior UI/UX and visual designer. I connect structure, identity and web development to create clear digital experiences with character.')}
           </p>
           <Link
             href="#selected-work"
