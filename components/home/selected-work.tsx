@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useLanguage } from '@/components/language-provider'
 import { copy, localizeProject } from '@/lib/i18n'
 import { featuredProjects, type Project } from '@/lib/projects'
-import { Container, Eyebrow } from '../container'
+import { Container } from '../container'
 import { ProjectImage } from '../project-image'
 
 export function SelectedWork() {
@@ -15,10 +15,9 @@ export function SelectedWork() {
       <Container className="py-28 md:py-40">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <Eyebrow index="02">{copy(language, 'Proyectos seleccionados', 'Selected projects')}</Eyebrow>
             <h2
               id="selected-title"
-              className="mt-6 text-5xl font-medium leading-none md:text-8xl"
+              className="text-5xl font-semibold leading-[0.94] tracking-tight md:text-8xl"
             >
               {copy(language, 'Trabajo seleccionado', 'Selected work')}
             </h2>
@@ -28,10 +27,10 @@ export function SelectedWork() {
           </Link>
         </div>
 
-        <ol className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 md:mt-24 md:gap-x-10 md:gap-y-24">
+        <ol className="mt-16 grid gap-x-8 gap-y-16 md:grid-cols-2 md:mt-24 md:gap-x-10 md:gap-y-24">
           {featuredProjects.map((project, i) => (
-            <li key={project.slug}>
-              <FeaturedEntry project={localizeProject(project, language)} language={language} />
+            <li key={project.slug} className={i === 0 ? 'md:col-span-2' : undefined}>
+              <FeaturedEntry wide={i === 0} project={localizeProject(project, language)} language={language} />
             </li>
           ))}
         </ol>
@@ -40,16 +39,16 @@ export function SelectedWork() {
   )
 }
 
-function FeaturedEntry({ project, language }: { project: Project; language: 'es' | 'en' }) {
+function FeaturedEntry({ project, language, wide }: { wide: boolean; project: Project; language: 'es' | 'en' }) {
   return (
     <Link href={`/projects/${project.slug}`} className="group block">
       <ProjectImage
         media={project.cover}
-        aspect="aspect-[4/3]"
-        sizes="(min-width: 640px) 50vw, 100vw"
+        aspect={wide ? 'aspect-[4/3] md:aspect-[2/1]' : 'aspect-[4/3]'}
+        sizes={wide ? '100vw' : '(min-width: 768px) 50vw, 100vw'}
         interactive
       />
-      <div className="mt-5">
+      <div className="mt-4 border-t border-line pt-4">
         <p className="text-xs font-medium text-muted-foreground">
           {project.number} · {project.categories.join(' · ')}
         </p>
