@@ -5,52 +5,44 @@ import { useLanguage } from '@/components/language-provider'
 import { copy } from '@/lib/i18n'
 import { getProject } from '@/lib/projects'
 import { site } from '@/lib/site'
-import { Container, Eyebrow } from '../container'
+import { Container } from '../container'
 import { ProjectImage } from '../project-image'
 
 export function Hero() {
   const { language } = useLanguage()
-  const highlight = getProject('dlab')
+  const highlight = getProject('bruma')
 
   return (
-    <section aria-labelledby="hero-title" className="overflow-hidden">
-      <Container className="pb-16 pt-8 md:pb-24 md:pt-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <p className="eyebrow inline-flex items-center gap-2 rounded-full bg-citrus px-4 py-2 text-foreground">
-            <span aria-hidden className="size-2 rounded-full bg-foreground" />
-            {copy(language, site.availability, 'Available for junior opportunities')}
-          </p>
-          <Eyebrow>{copy(language, site.location, 'Murcia · Spain')}</Eyebrow>
+    <section aria-labelledby="hero-title" className="overflow-hidden bg-[#19151d] text-[#faf5f0]">
+      <Container className="py-8 md:py-12">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-white/25 pb-4 font-mono text-xs uppercase tracking-wider">
+          <span>{copy(language, 'Diseño UI/UX y web', 'UI/UX and web design')}</span>
+          <span className="text-brand">{copy(language, site.availability, 'Available for junior roles')}</span>
         </div>
-
-        <h1 id="hero-title" className="mt-14 text-6xl font-bold leading-[0.86] tracking-tight sm:text-7xl md:mt-20 md:text-9xl xl:text-[9rem]">
-          <span className="block">{copy(language, 'Diseño digital', 'Digital design')}</span>
-          <span className="block text-brand-ink">{copy(language, 'con intención.', 'with intent.')}</span>
-        </h1>
-
-        <div className="mt-10 flex flex-col gap-6 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            {copy(language, 'Soy Carmen María, diseñadora junior de UI/UX y diseño visual. Conecto estructura, identidad y desarrollo web para dar forma a experiencias digitales claras y con personalidad.', 'I am Carmen María, a junior UI/UX and visual designer. I connect structure, identity and web development to create clear digital experiences with character.')}
-          </p>
-          <Link
-            href="#selected-work"
-            className="inline-flex min-h-12 items-center justify-center gap-3 self-start rounded-full bg-foreground px-6 text-sm font-semibold text-background transition-transform hover:-translate-y-1 md:self-auto"
-          >
-            {copy(language, 'Explorar proyectos', 'Explore projects')} <span aria-hidden>↘</span>
-          </Link>
+        <div className="grid items-center gap-8 py-10 md:grid-cols-[1.05fr_1fr] md:gap-12 md:py-16">
+          <div>
+            <h1 id="hero-title" className="text-[clamp(3.5rem,10vw,9rem)] font-semibold uppercase leading-[0.86] tracking-[-0.07em]">
+              <span className="block">Carmen</span>
+              <span className="block">María</span>
+              <span className="block text-brand">Pérez</span>
+            </h1>
+            <p className="mt-8 max-w-md text-base leading-relaxed md:text-lg">
+              {copy(language, 'De la Historia del Arte al diseño de interfaces. Diseño webs, publicaciones digitales y experiencias interactivas.', 'From art history to interface design. I design websites, digital publications and interactive experiences.')}
+            </p>
+            <Link href="#selected-work" className="mt-6 inline-block border-b border-brand pb-1 text-base font-semibold text-brand hover:text-white">
+              {copy(language, 'Explorar proyectos', 'Explore projects')}
+            </Link>
+          </div>
+          {highlight && (
+            <Link href={`/projects/${highlight.slug}`} className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">
+              <ProjectImage media={highlight.cover} aspect="aspect-[4/3]" sizes="(min-width: 768px) 46vw, 95vw" priority interactive />
+              <div className="mt-4 flex flex-wrap items-baseline justify-between gap-2 border-t border-white/25 pt-3">
+                <span className="text-2xl font-semibold">{highlight.title}</span>
+                <span className="font-mono text-sm text-brand">{copy(language, 'Revista cultural digital', 'Digital culture magazine')}</span>
+              </div>
+            </Link>
+          )}
         </div>
-
-        {highlight && (
-          <Link href={`/projects/${highlight.slug}`} className="group relative mt-12 block overflow-hidden rounded-xl bg-foreground md:mt-16">
-            <ProjectImage media={highlight.cover} aspect="aspect-[4/3] md:aspect-[21/9]" sizes="100vw" priority interactive />
-            <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 sm:inset-x-8 sm:bottom-8">
-              <span className="rounded-full bg-background px-4 py-2 text-xs font-semibold sm:px-5 sm:py-3 sm:text-sm">
-                {copy(language, 'Proyecto destacado · DLAB', 'Featured project · DLAB')}
-              </span>
-              <span aria-hidden className="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-xl transition-transform group-hover:rotate-45 sm:size-14">↗</span>
-            </div>
-          </Link>
-        )}
       </Container>
     </section>
   )
