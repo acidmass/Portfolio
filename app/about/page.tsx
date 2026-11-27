@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ContactLinks } from '@/components/contact-links'
-import { Collectible } from '@/components/collectible'
 import { Container } from '@/components/container'
 import { ProjectImage } from '@/components/project-image'
 import { Section } from '@/components/project/project-sections'
@@ -29,13 +28,11 @@ export default function AboutPage() {
             <LocalizedText es="Sobre mí" en="About me" />
           </h1>
           <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:gap-8">
-            <Collectible>
-              <ProjectImage
-                media={{ src: about.photo, alt: `Fotografía profesional de ${site.name}` }}
-                aspect="aspect-[4/5]" sizes="(min-width: 768px) 40vw, 100vw"
-                priority
-              />
-            </Collectible>
+            <ProjectImage
+              media={{ src: about.photo, alt: `Fotografía profesional de ${site.name}` }}
+              aspect="aspect-[4/5]" sizes="(min-width: 768px) 40vw, 100vw"
+              priority className="md:col-span-5"
+            />
             <div className="md:col-span-6 md:col-start-7 md:self-center">
               <p className="text-balance text-2xl font-semibold leading-snug lg:text-3xl">
                 <LocalizedText es={about.intro} en={about.introEn} />

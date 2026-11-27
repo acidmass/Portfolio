@@ -1,56 +1,33 @@
 'use client'
 
 import Link from 'next/link'
+import { Collectible } from '@/components/collectible'
+import { Container } from '@/components/container'
 import { useLanguage } from '@/components/language-provider'
 import { copy } from '@/lib/i18n'
-import { getProject } from '@/lib/projects'
-import { site } from '@/lib/site'
-import { Container, Eyebrow } from '../container'
-import { ProjectImage } from '../project-image'
 
 export function Hero() {
   const { language } = useLanguage()
-  const highlight = getProject('dlab')
 
   return (
-    <section aria-labelledby="hero-title" className="overflow-hidden">
-      <Container className="pb-16 pt-8 md:pb-24 md:pt-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <p className="eyebrow inline-flex items-center gap-2 rounded-full bg-citrus px-4 py-2 text-foreground">
-            <span aria-hidden className="size-2 rounded-full bg-foreground" />
-            {copy(language, site.availability, 'Available for junior opportunities')}
+    <section aria-labelledby="hero-title" className="overflow-hidden border-b border-line bg-[#faf1e9] text-[#421723]">
+      <Container className="grid items-center gap-5 py-9 sm:py-12 md:grid-cols-[1.12fr_1fr] md:gap-6 md:py-16 xl:py-20">
+        <div>
+          <p className="eyebrow mb-5 md:mb-8">
+            {copy(language, 'Diseñadora UI y web · Murcia', 'UI & web designer · Murcia')}
           </p>
-          <Eyebrow>{copy(language, site.location, 'Murcia · Spain')}</Eyebrow>
-        </div>
-
-        <h1 id="hero-title" className="mt-14 text-6xl font-bold leading-[0.86] tracking-tight sm:text-7xl md:mt-20 md:text-9xl xl:text-[9rem]">
-          <span className="block">{copy(language, 'Diseño digital', 'Digital design')}</span>
-          <span className="block text-brand-ink">{copy(language, 'con intención.', 'with intent.')}</span>
-        </h1>
-
-        <div className="mt-10 flex flex-col gap-6 md:mt-14 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            {copy(language, 'Soy Carmen María, diseñadora junior de UI/UX y diseño visual. Conecto estructura, identidad y desarrollo web para dar forma a experiencias digitales claras y con personalidad.', 'I am Carmen María, a junior UI/UX and visual designer. I connect structure, identity and web development to create clear digital experiences with character.')}
+          <h1 id="hero-title" className="text-[clamp(3.2rem,7.5vw,7rem)] font-semibold leading-[0.94] tracking-[-0.065em]">
+            Carmen María
+            <span className="block font-serif text-[1.12em] font-normal italic tracking-[-0.05em] text-[#81364a]">Pérez</span>
+          </h1>
+          <p className="mt-6 max-w-[32rem] text-base leading-relaxed text-[#593b40] md:mt-8 md:text-xl">
+            {copy(language, 'Estudié Historia del Arte y hoy diseño interfaces y desarrollo webs. En BRUMA reuní las dos cosas en una revista cultural que diseñé y programé.', 'I studied Art History and now design interfaces and build websites. BRUMA brings both together in a cultural magazine I designed and coded.')}
           </p>
-          <Link
-            href="#selected-work"
-            className="inline-flex min-h-12 items-center justify-center gap-3 self-start rounded-full bg-foreground px-6 text-sm font-semibold text-background transition-transform hover:-translate-y-1 md:self-auto"
-          >
-            {copy(language, 'Explorar proyectos', 'Explore projects')} <span aria-hidden>↘</span>
+          <Link href="#selected-work" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-current text-sm font-semibold md:mt-8">
+            {copy(language, 'Ver mis proyectos', 'Explore my work')} <span aria-hidden>↘</span>
           </Link>
         </div>
-
-        {highlight && (
-          <Link href={`/projects/${highlight.slug}`} className="group relative mt-12 block overflow-hidden rounded-xl bg-foreground md:mt-16">
-            <ProjectImage media={highlight.cover} aspect="aspect-[4/3] md:aspect-[21/9]" sizes="100vw" priority interactive />
-            <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 sm:inset-x-8 sm:bottom-8">
-              <span className="rounded-full bg-background px-4 py-2 text-xs font-semibold sm:px-5 sm:py-3 sm:text-sm">
-                {copy(language, 'Proyecto destacado · DLAB', 'Featured project · DLAB')}
-              </span>
-              <span aria-hidden className="flex size-11 shrink-0 items-center justify-center rounded-full bg-brand text-xl transition-transform group-hover:rotate-45 sm:size-14">↗</span>
-            </div>
-          </Link>
-        )}
+        <Collectible />
       </Container>
     </section>
   )
