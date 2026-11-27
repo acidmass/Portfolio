@@ -9,8 +9,8 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <AboutTeaser />
       <SelectedWork />
+      <AboutTeaser />
       <WhatIDo />
       <MoreWork />
       <FinalCta />

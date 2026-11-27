@@ -21,7 +21,7 @@ export function Hero() {
             <span className="block font-serif text-[1.12em] font-normal italic tracking-[-0.05em] text-[#81364a]">Pérez</span>
           </h1>
           <p className="mt-6 max-w-[32rem] text-base leading-relaxed text-[#593b40] md:mt-8 md:text-xl">
-            {copy(language, 'Estudié Historia del Arte y hoy diseño interfaces y desarrollo webs. En BRUMA reuní las dos cosas en una revista cultural que diseñé y programé.', 'I studied Art History and now design interfaces and build websites. BRUMA brings both together in a cultural magazine I designed and coded.')}
+            {copy(language, 'Diseño interfaces en Figma y las llevo a la web con HTML, CSS y WordPress. Mi formación en Historia del Arte se nota especialmente en BRUMA, la revista cultural que diseñé y programé.', 'I design interfaces in Figma and build websites with HTML, CSS and WordPress. My background in Art History comes through in BRUMA, the cultural magazine I designed and coded.')}
           </p>
           <Link href="#selected-work" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-current text-sm font-semibold md:mt-8">
             {copy(language, 'Ver mis proyectos', 'Explore my work')} <span aria-hidden>↘</span>
