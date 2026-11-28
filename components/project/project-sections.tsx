@@ -21,7 +21,6 @@ export function Section({ number, title, children }: { number: string; title: st
       <Container className="grid grid-cols-1 gap-8 py-20 md:grid-cols-12 md:gap-8 md:py-28">
         <div className="md:col-span-3">
           <h2 id={`s-${number}`} className="eyebrow flex items-center gap-3 md:sticky md:top-24">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand text-foreground">{number}</span>
             <span>{language === 'en' ? englishTitles[title] ?? title : title}</span>
           </h2>
         </div>
@@ -56,7 +55,7 @@ export function ProjectHero({ project }: { project: Project }) {
       <Container className="pb-12 pt-10 md:pb-20 md:pt-14">
         <div className="eyebrow flex items-center justify-between gap-4 pb-4 text-muted-foreground">
           <Link href="/work" className="link-underline text-foreground">{copy(language, 'Todos los proyectos', 'All projects')}</Link>
-          <span>{copy(language, 'Proyecto', 'Project')} {p.number}</span>
+          <span>{copy(language, 'Proyecto', 'Project')}</span>
         </div>
         <h1 id="project-title" className="mt-14 break-words text-5xl font-bold leading-[0.95] sm:text-7xl md:mt-20 md:text-8xl xl:text-[9rem]">
           {p.title}
@@ -159,7 +158,6 @@ export function NextProject({ project }: { project: Project }) {
       <Container className="py-20 md:py-32">
         <p className="eyebrow text-background/60">{copy(language, 'Siguiente proyecto', 'Next project')}</p>
         <Link href={`/projects/${p.slug}`} className="group mt-10 block md:mt-16">
-          <span className="block font-mono text-sm text-background/60">{p.number}</span>
           <span className="mt-4 block break-words text-4xl font-bold leading-tight transition-transform duration-500 group-hover:translate-x-2 sm:text-6xl md:text-8xl">{p.title}</span>
           <span className="eyebrow mt-5 block text-background/60">{p.categories.join(' · ')}</span>
         </Link>

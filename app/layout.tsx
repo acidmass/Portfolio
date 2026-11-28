@@ -7,8 +7,8 @@ import { LanguageProvider } from '@/components/language-provider'
 import { LocalizedText } from '@/components/localized-text'
 import './globals.css'
 
-const geist = localFont({ src: './fonts/geist-latin.woff2', variable: '--font-geist', weight: '100 900', display: 'swap' })
-const geistMono = localFont({ src: './fonts/geist-mono-latin.woff2', variable: '--font-geist-mono', weight: '100 900', display: 'swap' })
+const bodyFont = localFont({ src: './fonts/dm-sans-latin-wght-normal.woff2', variable: '--font-body', weight: '100 1000', display: 'swap' })
+const displayFont = localFont({ src: './fonts/archivo-narrow-latin-wght-normal.woff2', variable: '--font-display', weight: '400 700', display: 'swap' })
 
 export const metadata: Metadata = {
   title: {
@@ -29,12 +29,12 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#fff9f6',
+  themeColor: '#002FA7',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="es" className={`${bodyFont.variable} ${displayFont.variable}`}>
       <body id="top" className="antialiased">
         <LanguageProvider>
           <a

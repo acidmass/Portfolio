@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:  ui-monospace, monospace;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -39,30 +39,30 @@
 
 :root {
   color-scheme: light;
-  --background: #fff9f6;
-  --foreground: #171413;
-  --card: #fffdfb;
-  --card-foreground: #171413;
-  --popover: #fffdfb;
-  --popover-foreground: #171413;
-  --primary: #171413;
-  --primary-foreground: #fff9f6;
-  --secondary: #f2e9e4;
-  --secondary-foreground: #171413;
-  --muted: #f2e9e4;
-  --muted-foreground: #716762;
-  --accent: #d7b3ff;
-  --accent-foreground: #171413;
+  --background: #002fa7;
+  --foreground: #ffffff;
+  --card: #103aab;
+  --card-foreground: #ffffff;
+  --popover: #103aab;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #002fa7;
+  --secondary: #123cae;
+  --secondary-foreground: #ffffff;
+  --muted: #123cae;
+  --muted-foreground: #dce6ff;
+  --accent: #002fa7;
+  --accent-foreground: #ffffff;
   --destructive: #e56b4f;
-  --border: #e8d9d2;
-  --input: #e8d9d2;
-  --ring: #171413;
-  --line: #e8d9d2;
-  --surface: #f1e8e2;
-  --surface-hover: #e9ded8;
-  --brand: #d7b3ff;
-  --brand-ink: #7042a6;
-  --citrus: #e6f094;
+  --border: #5474c8;
+  --input: #5474c8;
+  --ring: #ffffff;
+  --line: #5474c8;
+  --surface: #123cae;
+  --surface-hover: #1845bb;
+  --brand: #002fa7;
+  --brand-ink: #dbe6ff;
+  --citrus: #143eaa;
   --radius: 0.75rem;
 }
 
@@ -70,6 +70,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+  h1, h2, h3 { font-family: var(--font-display), sans-serif; }
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
@@ -82,8 +83,8 @@
     font-feature-settings: 'ss01', 'cv11';
   }
   ::selection {
-    background: var(--brand);
-    color: var(--foreground);
+    background: white;
+    color: var(--background);
   }
 }
 

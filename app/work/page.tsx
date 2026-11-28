@@ -19,7 +19,6 @@ export default function WorkPage() {
         <Container className="pb-20 pt-10 md:pb-28 md:pt-14">
           <div className="eyebrow flex items-center justify-between pb-4 text-foreground/60">
             <span><LocalizedText es="Índice de proyectos" en="Project index" /></span>
-            <span>({String(projects.length).padStart(2, '0')})</span>
           </div>
           <h1 className="mt-14 text-6xl font-bold leading-[0.86] sm:text-7xl md:mt-20 md:text-9xl xl:text-[10rem]">
             <LocalizedText es="Proyectos" en="Work" />
@@ -42,7 +41,6 @@ export default function WorkPage() {
                 interactive
               />
               <div className="mt-5 flex items-center justify-between gap-4">
-                <span className="font-mono text-xs text-muted-foreground">{project.number}</span>
                 <Eyebrow className="text-right">
                   <LocalizedText
                     es={project.categories.join(' · ')}

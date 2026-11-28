@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from './language-provider'
 import { createBlisterRenderer } from '@/lib/blister-renderer'
 
-const artwork = '/images/carmen-blister.webp'
+const artwork = '/images/carmen-blister-white.webp'
 const limit = 55
 
 export function Collectible() {
@@ -52,7 +52,7 @@ export function Collectible() {
   }
 
   return (
-    <div className="relative mx-auto aspect-[4/5] w-full max-w-[23rem] -rotate-3 drop-shadow-[0_14px_10px_rgba(71,25,33,0.18)] md:max-w-[32rem]">
+    <div className="relative mx-auto aspect-[4/5] w-full max-w-[17rem] -rotate-3 drop-shadow-[0_14px_10px_rgba(71,25,33,0.18)] md:max-w-[23rem]">
       <img src={artwork} alt={english ? 'Carmen’s collectible figure with design tools and Rodolfo' : 'Figura de Carmen con herramientas de diseño y Rodolfo'} className={ready ? 'hidden' : 'size-full object-contain p-5'} />
       <canvas ref={canvas} role="img" aria-label={english ? '3D figure. Use the arrow keys to turn it.' : 'Figura en 3D. Usa las flechas para girarla.'}
         tabIndex={ready ? 0 : -1}

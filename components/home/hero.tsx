@@ -10,24 +10,25 @@ export function Hero() {
   const { language } = useLanguage()
 
   return (
-    <section aria-labelledby="hero-title" className="overflow-hidden border-b border-line bg-[#faf1e9] text-[#421723]">
-      <Container className="grid items-center gap-5 py-9 sm:py-12 md:grid-cols-[1.12fr_1fr] md:gap-6 md:py-16 xl:py-20">
-        <div>
-          <p className="eyebrow mb-5 md:mb-8">
-            {copy(language, 'Diseñadora UI y web · Murcia', 'UI & web designer · Murcia')}
+    <section aria-labelledby="hero-title" className="overflow-hidden">
+      <Container className="py-8 md:py-12">
+        <h1 id="hero-title" className="text-center text-[clamp(2.8rem,11.6vw,10.5rem)] md:text-[clamp(4rem,8.9vw,8.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.035em]">
+          Carmen María Pérez
+        </h1>
+        <div className="mt-8 grid items-center gap-6 md:mt-10 md:grid-cols-[1fr_1.2fr_1fr] md:gap-8">
+          <p className="text-center text-2xl font-medium leading-tight md:text-left md:text-4xl">
+            {copy(language, 'Diseñadora de interfaces y webs', 'Interface and web designer')}
           </p>
-          <h1 id="hero-title" className="text-[clamp(3.2rem,7.5vw,7rem)] font-semibold leading-[0.94] tracking-[-0.065em]">
-            Carmen María
-            <span className="block font-serif text-[1.12em] font-normal italic tracking-[-0.05em] text-[#81364a]">Pérez</span>
-          </h1>
-          <p className="mt-6 max-w-[32rem] text-base leading-relaxed text-[#593b40] md:mt-8 md:text-xl">
-            {copy(language, 'Diseño interfaces en Figma y las llevo a la web con HTML, CSS y WordPress. Mi formación en Historia del Arte se nota especialmente en BRUMA, la revista cultural que diseñé y programé.', 'I design interfaces in Figma and build websites with HTML, CSS and WordPress. My background in Art History comes through in BRUMA, the cultural magazine I designed and coded.')}
-          </p>
-          <Link href="#selected-work" className="mt-5 inline-flex min-h-11 items-center gap-3 border-b border-current text-sm font-semibold md:mt-8">
-            {copy(language, 'Ver mis proyectos', 'Explore my work')} <span aria-hidden>↘</span>
-          </Link>
+          <Collectible />
+          <div className="mx-auto max-w-xs text-center md:mx-0 md:text-left">
+            <p className="text-base leading-relaxed md:text-lg">
+              {copy(language, 'Desde Murcia, diseño y desarrollo proyectos que van de una revista cultural a una app de movilidad.', 'Based in Murcia, I design and build projects ranging from a cultural magazine to a cycling app.')}
+            </p>
+            <Link href="#selected-work" className="mt-4 inline-flex min-h-11 items-center font-semibold underline underline-offset-4">
+              {copy(language, 'Ver proyectos', 'Explore my work')}
+            </Link>
+          </div>
         </div>
-        <Collectible />
       </Container>
     </section>
   )

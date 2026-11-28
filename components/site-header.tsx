@@ -94,7 +94,7 @@ export function SiteHeader() {
         <Container className="flex h-full flex-col justify-between pb-10 pt-8">
           <nav aria-label={language === 'en' ? 'Mobile' : 'Móvil'}>
             <ul>
-              {navigation.map((item, i) => (
+              {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -106,7 +106,6 @@ export function SiteHeader() {
                     )}
                   >
                     {navLabels[navigation.indexOf(item)]}
-                    <span className="eyebrow text-muted-foreground">{String(i + 1).padStart(2, '0')}</span>
                   </Link>
                 </li>
               ))}

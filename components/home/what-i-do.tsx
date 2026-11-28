@@ -24,7 +24,7 @@ export function WhatIDo() {
     <section aria-labelledby="what-title" className="border-t border-line">
       <Container className="py-28 md:py-40">
         <div className="grid gap-6 md:grid-cols-12 md:gap-8">
-          <Eyebrow index="03" className="md:col-span-3">
+          <Eyebrow className="md:col-span-3">
             {copy(language, 'Disciplinas', 'Disciplines')}
           </Eyebrow>
           <h2
@@ -40,7 +40,6 @@ export function WhatIDo() {
             <div key={group.title} className={i % 2 === 0 ? 'rounded-xl bg-brand p-6 md:p-8' : 'rounded-xl bg-citrus p-6 md:p-8'}>
               <div className="flex items-baseline justify-between">
                 <h3 className="text-2xl font-semibold md:text-3xl">{group.title}</h3>
-                <span className="font-mono text-xs text-foreground/60">{String(i + 1).padStart(2, '0')}</span>
               </div>
               <ul className="mt-8">
                 {group.items.map((item) => (

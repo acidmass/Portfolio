@@ -11,7 +11,7 @@ export function AboutTeaser() {
   return (
     <section aria-labelledby="about-title" className="bg-brand">
       <Container className="grid gap-8 py-16 md:grid-cols-12 md:gap-8 md:py-24">
-        <Eyebrow index="02" className="md:col-span-3">
+        <Eyebrow className="md:col-span-3">
           {copy(language, 'Sobre mí', 'About me')}
         </Eyebrow>
         <div className="md:col-span-8 md:col-start-5">
