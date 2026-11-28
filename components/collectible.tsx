@@ -19,6 +19,9 @@ export function Collectible() {
   useEffect(() => {
     const element = canvas.current
     if (!element) return
+    // Keep the illustration static on narrow screens and for reduced-motion preferences.
+    // Avoid creating a WebGL context where the interaction adds little value.
+    if (window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches) return
     let active = true
     const observer = new ResizeObserver(() => renderer.current?.draw(current.current))
     const image = new Image()
