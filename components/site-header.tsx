@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
@@ -43,9 +44,17 @@ export function SiteHeader() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="text-base font-bold tracking-tight sm:text-lg md:text-xl"
+          aria-label={copy(language, `${site.name} · Ir al inicio`, `${site.name} · Go to homepage`)}
+          className="inline-flex size-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 md:size-14"
         >
-          {site.name}
+          <Image
+            src="/icon.svg"
+            alt=""
+            width={56}
+            height={56}
+            priority
+            className="size-full object-contain"
+          />
         </Link>
 
         <nav aria-label={language === 'en' ? 'Primary' : 'Principal'} className="hidden lg:block">
