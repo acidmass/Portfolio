@@ -35,7 +35,7 @@ export function SelectedWork() {
     const next = Math.min(Math.max(index, 0), cards.length - 1)
     track.scrollTo({
       left: cards[next].offsetLeft - cards[0].offsetLeft,
-      behavior: reducedMotion ? 'instant' : 'smooth',
+      behavior: reducedMotion ? 'auto' : 'smooth',
     })
     setActive(next)
   }, [getCards, reducedMotion])
@@ -97,7 +97,14 @@ export function SelectedWork() {
           </div>
         </div>
 
-        <ol ref={trackRef} aria-label={copy(language, 'Proyectos seleccionados', 'Selected projects')}
+        <ol ref={trackRef} aria-label={copy(language, 'Proyectos seleccionados', 'Selected projects')} tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.target !== event.currentTarget) return
+            if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+              event.preventDefault()
+              moveTo(active + (event.key === 'ArrowRight' ? 1 : -1))
+            }
+          }}
           className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:thin] [scrollbar-color:#B9CCFF_transparent] md:mt-14 md:gap-8">
           {featuredProjects.map((source) => {
             const project = localizeProject(source, language)
@@ -124,7 +131,7 @@ export function SelectedWork() {
         </ol>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            {copy(language, 'Arrastra, desliza o utiliza las flechas', 'Drag, swipe or use the arrows')}
+            {copy(language, 'Desliza o utiliza las flechas', 'Swipe or use the arrows')}
           </p>
           <Link href="/work" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4">
             {copy(language, 'Ver todos los proyectos', 'See all projects')} <ArrowUpRight aria-hidden size={17} />
