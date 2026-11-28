@@ -11,6 +11,7 @@ const bodyFont = localFont({ src: './fonts/dm-sans-latin-wght-normal.woff2', var
 const displayFont = localFont({ src: './fonts/archivo-narrow-latin-wght-normal.woff2', variable: '--font-display', weight: '400 700', display: 'swap' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://carmenmariaperez.com"),
   title: {
     default: 'Carmen María Pérez — Diseñadora UI/UX & Visual',
     template: '%s — Carmen María Pérez',

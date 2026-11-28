@@ -60,7 +60,7 @@ export function ProjectHero({ project }: { project: Project }) {
         <h1 id="project-title" className="mt-14 break-words text-5xl font-bold leading-[0.95] sm:text-7xl md:mt-20 md:text-8xl xl:text-[9rem]">
           {p.title}
         </h1>
-        <p className="mt-8 max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-2xl">{p.description}</p>
+        {p.description && <p className="mt-8 max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-2xl">{p.description}</p>}
         <dl className="mt-10 grid gap-6 rounded-xl bg-secondary p-6 sm:grid-cols-[1fr_auto] md:mt-14 md:p-8">
           <div>
             <dt className="eyebrow text-muted-foreground">{copy(language, 'Áreas', 'Areas')}</dt>
@@ -72,7 +72,7 @@ export function ProjectHero({ project }: { project: Project }) {
           </div>}
         </dl>
       </Container>
-      <Container><ProjectImage media={p.cover} aspect="aspect-[16/10] md:aspect-[16/9]" priority /></Container>
+      {p.cover.src && <Container><ProjectImage media={p.cover} aspect="aspect-[16/10] md:aspect-[16/9]" priority /></Container>}
     </section>
   )
 }
@@ -86,16 +86,25 @@ export function ProjectOverview({ project }: { project: Project }) {
     { label: copy(language, 'Tipo de proyecto', 'Project type'), value: p.type },
     { label: copy(language, 'Herramientas', 'Tools'), value: p.tools.length ? p.tools.join(' · ') : undefined },
   ]
+  const visibleFacts = facts.filter(fact => fact.value?.trim())
+  const links = (p.links ?? []).filter(link => {
+    try {
+      return Boolean(link.label.trim()) && ['http:', 'https:'].includes(new URL(link.href).protocol)
+    } catch {
+      return false
+    }
+  })
+  if (!visibleFacts.length && !links.length && !p.deliverables?.length) return null
   return (
     <Section number="02" title={copy(language, 'El proyecto', 'The project')}>
-      <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
-        {facts.filter((fact) => fact.value).map((fact) => (
+      {!!visibleFacts.length && <dl className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+        {visibleFacts.map((fact) => (
           <div key={fact.label}>
             <dt className="eyebrow text-muted-foreground">{fact.label}</dt>
             <dd className="mt-3 text-lg leading-relaxed">{fact.value}</dd>
           </div>
         ))}
-      </dl>
+      </dl>}
       {!!p.deliverables?.length && (
         <div className="mt-10 border-t border-line pt-8">
           <p className="eyebrow text-muted-foreground">{copy(language, 'Qué incluye', 'Deliverables')}</p>
@@ -104,9 +113,9 @@ export function ProjectOverview({ project }: { project: Project }) {
           </ul>
         </div>
       )}
-      {!!p.links?.length && (
+      {!!links.length && (
         <div className="mt-8 flex flex-wrap gap-4">
-          {p.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-full bg-foreground px-6 py-3 font-semibold text-background transition-colors hover:bg-brand-ink">{link.label}</a>)}
+          {links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-full bg-foreground px-6 py-3 font-semibold text-background transition-colors hover:bg-brand-ink">{link.label}</a>)}
         </div>
       )}
     </Section>
@@ -118,7 +127,7 @@ export function ProjectBody({ project }: { project: Project }) {
   const { content: c } = localizeProject(project, language)
   const sections: { title: string; body: ReactNode }[] = []
   const addText = (title: string, text?: string, images: ProjectMedia[] = []) => {
-    if (!text && !images.some((image) => image.src)) return
+    if (!text?.trim() && !images.some((image) => image.src)) return
     sections.push({ title, body: <>
       {text && <Paragraphs text={text} className="max-w-3xl text-lg leading-relaxed md:text-xl" />}
       <MediaGrid images={images} />
@@ -126,7 +135,7 @@ export function ProjectBody({ project }: { project: Project }) {
   }
   addText(copy(language, 'Punto de partida', 'Starting point'), c.context)
   addText(copy(language, 'El reto', 'The challenge'), c.challenge)
-  addText(copy(language, 'Enfoque y estructura', 'Approach and structure'), c.process.text, c.process.images)
+  addText(copy(language, 'Metodología', 'Approach'), c.process.text, c.process.images)
   addText(copy(language, 'Decisiones de diseño', 'Design decisions'), c.design.text, c.design.images)
   const visualItems = [
     { title: copy(language, 'Tipografía', 'Typography'), value: c.visualSystem.typography },
@@ -136,17 +145,19 @@ export function ProjectBody({ project }: { project: Project }) {
   ].filter((item) => item.value)
   if (visualItems.length || c.visualSystem.images.some((image) => image.src)) {
     sections.push({ title: copy(language, 'Sistema visual', 'Visual system'), body: <>
-      <div className="grid gap-8 sm:grid-cols-2">
+      {!!visualItems.length && <div className="grid gap-8 sm:grid-cols-2">
         {visualItems.map((item) => <div key={item.title}>
           <h3 className="text-xl font-medium">{item.title}</h3>
           <Paragraphs text={item.value!} className="mt-4 leading-relaxed text-muted-foreground" />
         </div>)}
-      </div>
+      </div>}
       <MediaGrid images={c.visualSystem.images} />
     </> })
   }
   addText(copy(language, 'Adaptación e interacción', 'Adaptation and interaction'), c.responsive.text, c.responsive.images)
+  addText(copy(language, 'Solución', 'Solution'), c.solution?.text, c.solution?.images)
   addText(copy(language, 'Resultado', 'Outcome'), c.result.text, c.result.images)
+  addText(copy(language, 'Aprendizajes', 'Lessons learned'), c.learnings?.text, c.learnings?.images)
   return <>{sections.map((section, index) => <Section key={section.title} number={String(index + 3).padStart(2, '0')} title={section.title}>{section.body}</Section>)}</>
 }
 
@@ -156,10 +167,10 @@ export function NextProject({ project }: { project: Project }) {
   return (
     <section aria-label={copy(language, 'Siguiente proyecto', 'Next project')} className="bg-foreground text-background">
       <Container className="py-20 md:py-32">
-        <p className="eyebrow text-background/60">{copy(language, 'Siguiente proyecto', 'Next project')}</p>
+        <p className="eyebrow text-background/80">{copy(language, 'Siguiente proyecto', 'Next project')}</p>
         <Link href={`/projects/${p.slug}`} className="group mt-10 block md:mt-16">
           <span className="mt-4 block break-words text-4xl font-bold leading-tight transition-transform duration-500 group-hover:translate-x-2 sm:text-6xl md:text-8xl">{p.title}</span>
-          <span className="eyebrow mt-5 block text-background/60">{p.categories.join(' · ')}</span>
+          <span className="eyebrow mt-5 block text-background/80">{p.categories.join(' · ')}</span>
         </Link>
       </Container>
     </section>

@@ -47,7 +47,7 @@
   --popover-foreground: #ffffff;
   --primary: #ffffff;
   --primary-foreground: #002fa7;
-  --secondary: #123cae;
+  --secondary: #15388e;
   --secondary-foreground: #ffffff;
   --muted: #123cae;
   --muted-foreground: #dce6ff;
@@ -58,8 +58,8 @@
   --input: #5474c8;
   --ring: #ffffff;
   --line: #5474c8;
-  --surface: #123cae;
-  --surface-hover: #1845bb;
+  --surface: #1239a1;
+  --surface-hover: #214dc0;
   --brand: #002fa7;
   --brand-ink: #dbe6ff;
   --citrus: #143eaa;
@@ -81,6 +81,11 @@
     background-size: auto;
     background-repeat: no-repeat;
     font-feature-settings: 'ss01', 'cv11';
+  }
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 4px var(--background);
   }
   ::selection {
     background: white;

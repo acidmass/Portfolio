@@ -8,9 +8,6 @@ import { featuredProjects } from '@/lib/projects'
 import { Container } from '../container'
 import { ProjectImage } from '../project-image'
 
-const lead = featuredProjects.find(project => project.slug === 'murcia-pedalea')
-const selection = lead ? [lead, ...featuredProjects.filter(project => project !== lead)] : featuredProjects
-
 export function SelectedWork() {
   const { language } = useLanguage()
 
@@ -26,7 +23,7 @@ export function SelectedWork() {
           </Link>
         </div>
         <ol className="mt-7 grid gap-x-8 gap-y-10 md:mt-10 md:grid-cols-2 md:gap-y-14">
-          {selection.map((source, index) => {
+          {featuredProjects.map((source, index) => {
             const project = localizeProject(source, language)
             const first = index === 0
             return (

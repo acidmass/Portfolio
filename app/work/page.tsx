@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/page-metadata'
 import Link from 'next/link'
 import { Container, Eyebrow } from '@/components/container'
 import { ProjectImage } from '@/components/project-image'
@@ -7,10 +7,8 @@ import { projectDescriptions } from '@/lib/i18n'
 import { projects } from '@/lib/projects'
 import { cn } from '@/lib/utils'
 
-export const metadata: Metadata = {
-  title: 'Proyectos',
-  description: 'Proyectos de UI/UX, diseño web, branding y diseño visual de Carmen María Pérez.',
-}
+
+export const metadata = pageMetadata('/work', 'Proyectos de UI/UX, web y diseño visual', 'Selección de proyectos de Carmen María Pérez: movilidad ciclista en Murcia Pedalea, edición digital en BRUMA e identidad visual en DLAB.')
 
 export default function WorkPage() {
   return (

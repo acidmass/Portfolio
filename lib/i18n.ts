@@ -13,6 +13,7 @@ export const projectDescriptions: Record<string, string> = {
 }
 
 export const capabilityTranslations: Record<string, string> = {
+  Composición: 'Composition',
   Interfaces: 'Interfaces',
   'Arquitectura de información': 'Information architecture',
   Prototipos: 'Prototypes',
@@ -50,7 +51,8 @@ export function localizeProjectMedia(media: ProjectMedia, language: Language): P
 
   return {
     ...media,
-    alt: (media.src && mediaAltTexts[media.src]) || (slug && coverAltTexts[slug]) || media.alt
+    caption: media.en?.caption ?? media.caption,
+    alt: media.en?.alt || (media.src && mediaAltTexts[media.src]) || (slug && media.src?.includes('/cover.') && coverAltTexts[slug]) || media.alt
       .replace('Fotografía profesional de', 'Professional photo of')
       .replace('proceso', 'process')
       .replace('diseño', 'design')
@@ -82,6 +84,8 @@ export function localizeProject(project: Project, language: Language): Project {
       design: { ...content.design, text: english?.design ?? content.design.text, images: content.design.images.map((media) => localizeProjectMedia(media, language)) },
       visualSystem: { ...content.visualSystem, ...english?.visualSystem, images: content.visualSystem.images.map((media) => localizeProjectMedia(media, language)) },
       responsive: { ...content.responsive, text: english?.responsive ?? content.responsive.text, images: content.responsive.images.map((media) => localizeProjectMedia(media, language)) },
+      solution: content.solution && { ...content.solution, text: english?.solution ?? content.solution.text },
+      learnings: content.learnings && { ...content.learnings, text: english?.learnings ?? content.learnings.text },
       result: { ...content.result, text: english?.result ?? content.result.text, images: content.result.images.map((media) => localizeProjectMedia(media, language)) },
     },
   }

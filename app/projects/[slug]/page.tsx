@@ -1,3 +1,4 @@
+import { pageMetadata } from '@/lib/page-metadata'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { NextProject, ProjectBody, ProjectHero, ProjectOverview } from '@/components/project/project-sections'
@@ -13,10 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const project = getProject(slug)
   if (!project) return {}
-  return {
-    title: project.title,
-    description: project.description ?? `${project.title} — ${project.categories.join(' · ')}`,
-  }
+  return pageMetadata(`/projects/${slug}`, project.title, project.description ?? project.categories.join(' · '), project.cover.src)
 }
 
 export default async function ProjectPage({ params }: Props) {

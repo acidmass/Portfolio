@@ -6,7 +6,7 @@ export const site = {
   email: 'carmenmaria.perezm1@gmail.com',
   linkedin: 'https://www.linkedin.com/in/carmenmpm/',
   behance: 'https://www.behance.net/carmenprezm',
-  cv: { href: '/cv/carmen-maria-perez-cv.pdf.pdf', available: true },
+  cv: { href: '/cv/carmen-maria-perez-cv.pdf', available: true },
 }
 
 export const navigation = [
@@ -38,12 +38,14 @@ export const about = {
   experience: [
     {
       title: 'Diseño y desarrollo web', titleEn: 'Web design and development',
+      skills: ['WordPress', 'Elementor', 'HTML', 'CSS', 'JavaScript'],
       detail: 'Simuladores Deportivos Virtuales · 2026',
       description: 'Rediseño y maquetación de páginas en WordPress y Elementor, adaptación responsive y desarrollo de componentes e interacciones con HTML, CSS y JavaScript. Trabajo en la presentación de productos, servicios y contenidos de la marca.',
       descriptionEn: 'Website redesign and page layouts in WordPress and Elementor, responsive adaptations, and components and interactions built with HTML, CSS and JavaScript. Work on the presentation of the brand’s products, services and content.',
     },
     {
       title: 'Prácticas de diseño gráfico', titleEn: 'Graphic design internship',
+      skills: ['Composición', 'Tipografía', 'Jerarquía visual'],
       detail: 'Casaú Estudio · Murcia · 2026',
       description: 'Apoyo en proyectos de diseño gráfico y piezas de comunicación, aplicando criterios de composición, jerarquía visual, tipografía y coherencia de marca.',
       descriptionEn: 'Supported graphic design and communication projects, applying principles of composition, visual hierarchy, typography and brand consistency.',

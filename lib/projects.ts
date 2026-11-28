@@ -1,4 +1,4 @@
-export type ProjectMedia = { src?: string; alt: string; caption?: string; fit?: 'cover' | 'contain' }
+export type ProjectMedia = { src?: string; alt: string; caption?: string; en?: { alt: string; caption?: string }; fit?: 'cover' | 'contain' }
 type TextMedia = { text?: string; images: ProjectMedia[] }
 type VisualSystem = { typography?: string; color?: string; components?: string; graphicSystem?: string; images: ProjectMedia[] }
 
@@ -11,18 +11,18 @@ export type Project = {
   content: {
     context?: string; challenge?: string
     process: TextMedia; design: TextMedia; visualSystem: VisualSystem
-    responsive: TextMedia; result: TextMedia
+    responsive: TextMedia; result: TextMedia; solution?: TextMedia; learnings?: TextMedia
   }
   en?: {
     categories?: string[]; description?: string; type?: string; timeline?: string
     role?: string; deliverables?: string[]; links?: { label: string; href: string }[]
     context?: string; challenge?: string; process?: string; design?: string
-    visualSystem?: Omit<VisualSystem, 'images'>; responsive?: string; result?: string
+    visualSystem?: Omit<VisualSystem, 'images'>; responsive?: string; result?: string; solution?: string; learnings?: string
   }
 }
 
 // Published cases use existing project material. Add further cases when their images and text are ready.
-export const projects: Project[] = [
+const catalog: Project[] = [
   {
     "slug": "bruma",
     "number": "01",
@@ -247,7 +247,11 @@ export const projects: Project[] = [
         "images": []
       },
       "design": {
-        "text": "Las fichas presentan los datos del recorrido junto al mapa y una acción de inicio. Distancia, tiempo y características permiten revisar la información antes de comenzar. Durante el trayecto, las indicaciones y la acción de finalizar ocupan un lugar propio.",
+        "text": "La ficha reúne mapa, distancia y duración para que la persona pueda consultar esos datos antes de iniciar la ruta.",
+        "images": []
+      },
+      "solution": {
+        "text": "Desde la ficha se puede iniciar el recorrido. Durante el trayecto, la pantalla reúne las indicaciones y la acción de finalizar.",
         "images": [
           {
             "src": "/projects/murcia-pedalea/screens.webp",
@@ -289,7 +293,8 @@ export const projects: Project[] = [
       "context": "Murcia Pedalea brings cycling routes, safety information and local mobility content together in a mobile app proposal designed to support cycling in Murcia.",
       "challenge": "Make route information understandable: distance, duration, difficulty and route characteristics. The design goal is to support choosing and following a journey on a mobile interface.",
       "process": "The prototype connects access to the app, route browsing, a route detail view and navigation. Maps, routes, safety and profile are grouped into distinct areas.",
-      "design": "Route details bring together journey data, a map and a start action. Distance, time and route characteristics can be reviewed before starting. During a journey, directions and the finish action have their own place in the interface.",
+      "design": "Route details group the map, distance and duration so the cyclist can review them before starting.",
+      "solution": "Cyclists can start a route from its detail screen. During the ride, the screen presents directions and an action to finish.",
       "result": "A mobile app prototype with a visual identity and screens showing the main journey, from entry to following a route. The project connects information structure with interface design.",
       "visualSystem": {
         "typography": "A hierarchy between route names, journey data, directions and actions.",
@@ -461,6 +466,8 @@ export const projects: Project[] = [
   }
 ]
 
+const priorityCase = catalog.find(project => project.slug === 'murcia-pedalea')
+export const projects = priorityCase ? [priorityCase, ...catalog.filter(project => project !== priorityCase)] : catalog
 export const featuredProjects = projects.filter((project) => project.featured)
 export const moreProjects = projects.filter((project) => !project.featured)
 export function getProject(slug: string) { return projects.find((project) => project.slug === slug) }

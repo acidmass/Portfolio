@@ -1,19 +1,17 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/page-metadata'
 import { ContactLinks } from '@/components/contact-links'
 import { Container } from '@/components/container'
 import { LocalizedText } from '@/components/localized-text'
 import { site } from '@/lib/site'
 
-export const metadata: Metadata = {
-  title: 'Contacto',
-  description: 'Contacta con Carmen María Pérez para oportunidades junior, proyectos web, UI/UX o colaboraciones.',
-}
+
+export const metadata = pageMetadata('/contact', 'Contacto profesional', 'Contacta con Carmen María Pérez para puestos junior de UI/UX, diseño web y diseño visual. Aquí encontrarás mi correo, perfiles profesionales y CV.')
 
 export default function ContactPage() {
   return (
     <section className="bg-citrus">
       <Container className="pb-24 pt-10 md:pb-40 md:pt-14">
-        <div className="eyebrow flex items-center justify-between pb-4 text-foreground/60">
+        <div className="eyebrow flex items-center justify-between pb-4 text-muted-foreground">
           <span><LocalizedText es="Contacto" en="Contact" /></span>
           <span><LocalizedText es={site.location} en="Murcia · Spain" /></span>
         </div>

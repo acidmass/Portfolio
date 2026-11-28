@@ -7,6 +7,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [{ source: '/cv/carmen-maria-perez-cv.pdf.pdf', destination: '/cv/carmen-maria-perez-cv.pdf', permanent: true }]
+  },
   async headers() {
     return [
       {

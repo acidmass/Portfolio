@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/page-metadata'
 import Link from 'next/link'
 import { ContactLinks } from '@/components/contact-links'
 import { Container } from '@/components/container'
@@ -9,10 +9,8 @@ import { about, capabilities, site } from '@/lib/site'
 import { projects } from '@/lib/projects'
 import { capabilityTranslations } from '@/lib/i18n'
 
-export const metadata: Metadata = {
-  title: 'Sobre mí',
-  description: 'Conoce a Carmen María Pérez, diseñadora junior de UI/UX y diseño visual en Murcia. Formación, experiencia en diseño y desarrollo web, y herramientas.',
-}
+
+export const metadata = pageMetadata('/about', 'Sobre mí', 'Experiencia de Carmen María Pérez en diseño y desarrollo web, diseño gráfico y formación en Historia del Arte y Gráfica Interactiva.')
 
 export default function AboutPage() {
   const featuredProject = projects.find((project) => project.slug === 'murcia-pedalea')
@@ -55,7 +53,7 @@ export default function AboutPage() {
       <Section number="01" title="Experiencia">
         <ul className="divide-y divide-line">
           {about.experience.map((item) => (
-            <li key={item.title} className="py-7 first:pt-0">
+            <li key={item.title} className="py-8 first:pt-0">
               <h3 className="text-2xl font-semibold md:text-3xl">
                 <LocalizedText es={item.title} en={item.titleEn} />
               </h3>
@@ -63,6 +61,9 @@ export default function AboutPage() {
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
                 <LocalizedText es={item.description} en={item.descriptionEn} />
               </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {item.skills.map(skill => <li key={skill} className="rounded-full bg-secondary px-3 py-1 text-sm"><LocalizedText es={skill} en={capabilityTranslations[skill] ?? skill} /></li>)}
+              </ul>
             </li>
           ))}
         </ul>

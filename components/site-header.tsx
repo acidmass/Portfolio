@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import { copy, type Language } from '@/lib/i18n'
@@ -12,14 +12,26 @@ import { Container } from './container'
 
 export function SiteHeader() {
   const pathname = usePathname()
+  const modal = useRef<HTMLDialogElement>(null)
   const [open, setOpen] = useState(false)
   const { language, setLanguage } = useLanguage()
   const navLabels = language === 'en' ? ['Work', 'About', 'Contact'] : ['Proyectos', 'Sobre mí', 'Contacto']
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    const dialog = modal.current
+    if (!open || !dialog) return
+    dialog.showModal()
+    const previous = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+    const desktop = window.matchMedia('(min-width: 64rem)')
+    const close = () => setOpen(false)
+    desktop.addEventListener('change', close)
+    window.addEventListener('popstate', close)
     return () => {
-      document.body.style.overflow = ''
+      desktop.removeEventListener('change', close)
+      window.removeEventListener('popstate', close)
+      document.documentElement.style.overflow = previous
+      dialog.close()
     }
   }, [open])
 
@@ -86,12 +98,17 @@ export function SiteHeader() {
         </div>
       </Container>
 
-      <div
+      <dialog
+        ref={modal}
+        aria-label={copy(language, 'Navegación', 'Navigation')}
+        onCancel={() => setOpen(false)}
         id="mobile-menu"
-        hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-[4.5rem] bg-background text-foreground md:top-20 lg:hidden"
+        className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-background text-foreground"
       >
         <Container className="flex h-full flex-col justify-between pb-10 pt-8">
+          <button type="button" className="mb-5 flex min-h-11 items-center gap-2 self-end" onClick={() => setOpen(false)}>
+            {copy(language, 'Cerrar menú', 'Close menu')} <X aria-hidden size={20} />
+          </button>
           <nav aria-label={language === 'en' ? 'Mobile' : 'Móvil'}>
             <ul>
               {navigation.map((item) => (
@@ -116,7 +133,7 @@ export function SiteHeader() {
             <p>{copy(language, site.availability, 'Available for junior opportunities')}</p>
           </div>
         </Container>
-      </div>
+      </dialog>
     </header>
   )
 }
