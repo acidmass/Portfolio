@@ -71,17 +71,9 @@ export function SelectedWork() {
     <section id="selected-work" aria-labelledby="selected-title" className="overflow-hidden border-t border-line">
       <Container className="pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-3xl">
-            <h2 id="selected-title" className="text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.035em] md:text-7xl">
-              {copy(language, 'Proyectos que hablan por mí.', 'Work that speaks for me.')}
-            </h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              {copy(language,
-                'Diseño de interfaces, experiencias web e identidad visual. Desliza para descubrir cómo trabajo.',
-                'Interfaces, web experiences and visual identity. Browse the projects to see how I work.'
-              )}
-            </p>
-          </div>
+          <h2 id="selected-title" className="text-5xl font-semibold leading-none tracking-[-0.035em] md:text-7xl">
+            {copy(language, 'Proyectos', 'Work')}
+          </h2>
           <div className="flex items-center gap-3" aria-label={copy(language, 'Controles de proyectos', 'Project controls')}>
             <span className="mr-2 font-mono text-sm tabular-nums text-muted-foreground" aria-live="polite" aria-atomic="true">
               {String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
@@ -117,12 +109,8 @@ export function SelectedWork() {
                       <ArrowUpRight size={22} />
                     </span>
                   </div>
-                  <div className="flex flex-1 flex-col justify-between gap-5 px-6 pb-7 pt-6 sm:px-8 sm:pb-8">
-                    <div>
-                      <p className="text-sm font-medium text-[#31569C]">{project.categories.join(' · ')}</p>
-                      <h3 className="mt-3 text-3xl font-semibold leading-none tracking-tight sm:text-5xl">{project.title}</h3>
-                    </div>
-                    <p className="max-w-[52ch] text-base leading-relaxed text-[#294A83]">{project.description}</p>
+                  <div className="px-6 pb-7 pt-6 sm:px-8 sm:pb-8">
+                    <h3 className="text-3xl font-semibold leading-none tracking-tight sm:text-5xl">{project.title}</h3>
                   </div>
                 </Link>
               </li>
@@ -130,9 +118,9 @@ export function SelectedWork() {
           })}
         </ol>
         <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            {copy(language, 'Desliza o utiliza las flechas', 'Swipe or use the arrows')}
-          </p>
+          <span className="sr-only">
+            {copy(language, 'Desliza horizontalmente o utiliza las flechas para navegar por los proyectos.', 'Swipe horizontally or use the arrows to navigate between projects.')}
+          </span>
           <Link href="/work" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4">
             {copy(language, 'Ver todos los proyectos', 'See all projects')} <ArrowUpRight aria-hidden size={17} />
           </Link>
