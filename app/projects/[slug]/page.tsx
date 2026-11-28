@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/page-metadata'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { NextProject, ProjectBody, ProjectContactCta, ProjectHero, ProjectOverview } from '@/components/project/project-sections'
+import { NextProject, ProjectBody, ProjectHero, ProjectOverview } from '@/components/project/project-sections'
 import { getNextProject, getProject, projects } from '@/lib/projects'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -29,7 +29,6 @@ export default async function ProjectPage({ params }: Props) {
         <ProjectOverview project={project} />
         <ProjectBody project={project} />
       </div>
-      <ProjectContactCta />
       <NextProject project={getNextProject(slug)} />
     </article>
   )
