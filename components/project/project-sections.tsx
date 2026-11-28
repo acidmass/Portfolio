@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 import { useLanguage } from '@/components/language-provider'
 import { copy, localizeProject } from '@/lib/i18n'
 import type { Project, ProjectMedia } from '@/lib/projects'
+import { site } from '@/lib/site'
 import { Container } from '../container'
 import { Paragraphs } from '../pending'
 import { ProjectImage } from '../project-image'
@@ -172,6 +173,32 @@ export function NextProject({ project }: { project: Project }) {
           <span className="mt-4 block break-words text-4xl font-bold leading-tight transition-transform duration-500 group-hover:translate-x-2 sm:text-6xl md:text-8xl">{p.title}</span>
           <span className="eyebrow mt-5 block text-background/80">{p.categories.join(' · ')}</span>
         </Link>
+      </Container>
+    </section>
+  )
+}
+
+export function ProjectContactCta() {
+  const { language } = useLanguage()
+  return (
+    <section aria-labelledby="project-contact-title" className="bg-[#DCE5FF] text-[#00246E]">
+      <Container className="py-16 md:py-24">
+        <h2 id="project-contact-title" className="max-w-[19ch] text-4xl font-semibold leading-tight md:text-5xl">
+          {copy(language, '¿Te gustaría que aportara a tu equipo?', 'Could I contribute to your team?')}
+        </h2>
+        <p className="mt-4 max-w-[55ch] leading-relaxed text-[#294A8C]">
+          {copy(language, 'Estoy buscando oportunidades junior en UI/UX, diseño web y diseño visual.', 'I’m looking for junior opportunities in UI/UX, web and visual design.')}
+        </p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a href={`mailto:${site.email}`} className="inline-flex min-h-12 items-center rounded-full bg-[#002FA7] px-6 font-semibold text-white">
+            {copy(language, 'Contactar', 'Get in touch')}
+          </a>
+          {site.cv.available && (
+            <a href={site.cv.href} download className="inline-flex min-h-12 items-center rounded-full border border-[#002FA7] px-6 font-semibold text-[#002FA7]">
+              {copy(language, 'Descargar CV', 'Download CV')}
+            </a>
+          )}
+        </div>
       </Container>
     </section>
   )
