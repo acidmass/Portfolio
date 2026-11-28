@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react'
+import { ArrowDownRight, ArrowUpRight, Asterisk, Download } from 'lucide-react'
 import { Collectible } from '@/components/collectible'
 import { Container } from '@/components/container'
 import { useLanguage } from '@/components/language-provider'
@@ -53,7 +53,7 @@ export function Hero() {
               <div aria-hidden className="pointer-events-none absolute -left-20 bottom-10 size-64 rounded-full border border-[#002FA7]/15" />
               <div className="relative z-10 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.12em]">
                 <span>{copy(language, 'Diseño que se mueve', 'Design in motion')}</span>
-                <span aria-hidden>✳</span>
+                <Asterisk aria-hidden size={18} strokeWidth={2} />
               </div>
               <Collectible />
               <p className="relative z-10 mt-1 border-t border-[#002FA7]/20 pt-4 text-sm leading-snug">
